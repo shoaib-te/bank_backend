@@ -7,11 +7,13 @@ const accountSchema = new mongooes.Schema({
     default:"USA"
   },
   status: {
+    type:String,
     enum: {
       values: ['active', 'inactive','closed'],
       message: '{VALUE} is not supported',
-      default: 'active',
+      
     },
+    default: 'active',
   },
   userId: {
     type: mongooes.Schema.Types.ObjectId,
@@ -22,7 +24,7 @@ const accountSchema = new mongooes.Schema({
 },{
     timestamps: true,
 })
-accountSchema.index({user:1,status:1})
+accountSchema.index({userId:1,status:1})
 
 const AccountModel = mongooes.model('Account', accountSchema);
 

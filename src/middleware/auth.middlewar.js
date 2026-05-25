@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User.moduls');
 
 // Middleware to verify JWT token
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
     const token= req.cookies.token || req.header.authorization.split(' ')[1];
     if(!token){
         return res.status(401).json({message:'Unauthorized'})

@@ -50,8 +50,38 @@ const userRegisterationEmail=async(useremail,username)=>{
     await sendEmail(useremail,subject,text,html);
 }
 
+const transactionAlertEmail=async(useremail,username,amount,toAccountId)=>{
+    const subject="Transaction Alert from Your Digital Bank Account 🏦";
+    const text=`Hello ${username},\n\nYour transaction of amount ${amount} to account ${toAccountId} has been completed.\n\nIf you did not authorize this transaction, please contact fraud support immediately.`;
+    const html=`
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+            <h2 style="color: #003366;">Transaction Alert for ${username}</h2>
+            <p>Your transaction of amount ${amount} to account ${toAccountId} has been completed.</p>
+        </div>
+    `;
+    await sendEmail(useremail,subject,text,html);
+}
+const transactionFailureEmail=async(useremail,username,amount,toAccountId,errorMessage)=>{  
+
+    const subject="Transaction Failure Alert from Your Digital Bank Account 🏦";
+    const text=`Hello ${username},\n\nWe regret to inform you that your transaction of amount ${amount} to account ${toAccountId} has failed.\nError Details: ${errorMessage}\n\nPlease review your transaction details and try again. If you need assistance, contact our support team.`;
+    const html=`
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">   
+            <h2 style="color: #003366;">Transaction Failure Alert for ${username}</h2>
+            <p>We regret to inform you that your transaction of amount ${amount} to account ${toAccountId} has failed.</p>
+            <p><strong>Error Details:</strong> ${errorMessage}</p>  
+            <p>Please review your transaction details and try again. If you need assistance, contact our support team.</p>
+        </div>
+    `;
+    await sendEmail(useremail,subject,text,html);
+}
+
+
 
 module.exports = {
-    userRegisterationEmail
+    userRegisterationEmail,
+    transactionAlertEmail,
+    transactionFailureEmail
+    
 
 }

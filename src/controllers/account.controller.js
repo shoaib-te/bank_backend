@@ -5,7 +5,7 @@ const createAccount = async (req, res) => {
     const user = req.user;
 
     const account = await AccountModel.create({
-         user: user._id
+         userId: user._id
          });
     res.status(201).json({
          message: "account created",
