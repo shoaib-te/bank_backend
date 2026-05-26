@@ -20,6 +20,12 @@ const Userschma=new mongoose.Schema({
         select:false
     
     },
+    systemuser:{
+        type:Boolean,
+        default:false,
+        immutable:true,
+        select:false
+    }
 
 },{timestamps:true})
 
